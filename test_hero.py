@@ -39,6 +39,12 @@ class TestHero(unittest.TestCase):
         self.assertEqual(0, self.bron_hero.get_health())
         self.assertFalse(self.bron_hero.is_alive())
 
+    def test_take_damage_die_exact(self):
+        self.bron_hero.health = 50
+        self.bron_hero.take_damage(50)
+        self.assertEqual(0, self.bron_hero.get_health())
+        self.assertFalse(self.bron_hero.is_alive())
+
     def test_take_healing_regular(self):
         self.bron_hero.health = 40
         self.bron_hero.take_healing(20)
@@ -48,6 +54,12 @@ class TestHero(unittest.TestCase):
     def test_take_healing_overheal(self):
         self.bron_hero.health = 90
         self.assertTrue(self.bron_hero.take_healing(20))
+        self.assertEqual(100, self.bron_hero.get_health())
+        self.assertTrue(self.bron_hero.is_alive())
+
+    def test_take_healing_overheal_exact(self):
+        self.bron_hero.health = 90
+        self.assertTrue(self.bron_hero.take_healing(10))
         self.assertEqual(100, self.bron_hero.get_health())
         self.assertTrue(self.bron_hero.is_alive())
 
