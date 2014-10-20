@@ -13,11 +13,7 @@ class TestHero(unittest.TestCase):
         self.assertEqual(1.4, self.hell_orc.berserk_factor)
 
     def test_berserk_over(self):
-        self.assertRaises(ValueError, Orc("My Orc", 100, 3))
-
-    def test_berserk_under(self):
-        self.hell_orc.berserk_factor = 0.5
-        self.assertEqual(1, self.hell_orc.berserk_factor)
+        self.assertRaises(ValueError, Orc, "My Orc", 100, 3)
 
     def test_get_health(self):
         self.hell_orc.health = 80
