@@ -1,11 +1,13 @@
 import unittest
 from entity import Entity
+from weapon import Weapon
 
 
 class TestEntity(unittest.TestCase):
 
     def setUp(self):
         self.entity = Entity("NewEntity", 100)
+        self.axe = Weapon("Axe", 10, 0.2)
 
     def test_attributes(self):
         self.assertEqual("NewEntity", self.entity.name)
@@ -64,6 +66,20 @@ class TestEntity(unittest.TestCase):
         self.assertFalse(self.entity.take_healing(20))
         self.assertEqual(0, self.entity.get_health())
         self.assertFalse(self.entity.is_alive())
+
+    def test_has_weapon_not(self):
+        self.assertFalse(self.entity.has_weapon())
+
+    def test_equip_weapon(self):
+        self.entity.equip_weapon(self.axe)
+        self.assertTrue(self.entity.has_weapon())
+
+    def test_attack(self):
+        self.entity.equip_weapon(self.axe)
+        self.assertEqual(10, self.entity.attack())
+
+    def test_attack_no_weapon(self):
+        self.assertEqual(0, self.entity.attack())
 
 
 if __name__ == '__main__':
